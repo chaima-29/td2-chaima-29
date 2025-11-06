@@ -8,7 +8,6 @@ package fr.uvsq.cprog;
  */
 public class ChaineCryptee {
 
-    // ✅ On ne stocke plus la chaîne en clair, seulement la chaîne cryptée
     private String cryptee;
     private int decalage;
 
@@ -44,7 +43,7 @@ public class ChaineCryptee {
     }
 
     /**
-     * Retourne la chaîne décryptée calculée à partir de la version cryptée.
+     * Retourne la chaîne décryptée.
      */
     public String decrypte() {
         return decrypteStatic(cryptee, decalage);
@@ -77,5 +76,19 @@ public class ChaineCryptee {
     private static char decaleCaractere(char c, int decalage) {
         if (c == ' ') return ' ';
         return (char) ('A' + (c - 'A' + decalage + 26) % 26);
+    }
+
+    /**
+     * Méthode main de démonstration.
+     * Montre le chiffrement et le déchiffrement d'une chaîne.
+     */
+    public static void main(String[] args) {
+        ChaineCryptee c1 = ChaineCryptee.deEnClair("BONJOUR TOUT LE MONDE", 3);
+        System.out.println("Chaîne en clair   : BONJOUR TOUT LE MONDE");
+        System.out.println("Chaîne cryptée    : " + c1.crypte());
+        System.out.println("Chaîne décryptée  : " + c1.decrypte());
+
+        ChaineCryptee c2 = ChaineCryptee.deCryptee("DEF", 3);
+        System.out.println("Décryptage de DEF avec clé 3 : " + c2.decrypte());
     }
 }
