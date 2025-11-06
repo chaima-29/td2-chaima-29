@@ -3,54 +3,58 @@ package fr.uvsq.cprog;
 /**
  * Classe permettant de chiffrer et déchiffrer une chaîne de caractères
  * (lettres majuscules et espaces) par décalage.
+ *
+ * Version modifiée : seule la chaîne cryptée est stockée.
  */
 public class ChaineCryptee {
 
-    private String clair;
+    // ✅ On ne stocke plus la chaîne en clair, seulement la chaîne cryptée
+    private String cryptee;
     private int decalage;
 
     /**
-     * Constructeur privé pour forcer l'utilisation des méthodes de fabrique.
+     * Constructeur privé (utilisation du modèle de fabrique).
      */
-    private ChaineCryptee(String clair, int decalage) {
-        this.clair = clair;
+    private ChaineCryptee(String cryptee, int decalage) {
+        this.cryptee = cryptee;
         this.decalage = decalage;
     }
 
     /**
-     * Méthode de fabrique pour créer une ChaineCryptee à partir d'une chaîne en clair.
+     * Méthode de fabrique à partir d'une chaîne en clair.
+     * Chiffre immédiatement la chaîne avant de la stocker.
      */
     public static ChaineCryptee deEnClair(String clair, int decalage) {
-        return new ChaineCryptee(clair, decalage);
+        String cryptee = crypteStatic(clair, decalage);
+        return new ChaineCryptee(cryptee, decalage);
     }
 
     /**
-     * Méthode de fabrique pour créer une ChaineCryptee à partir d'une chaîne déjà cryptée.
+     * Méthode de fabrique à partir d'une chaîne déjà cryptée.
      */
     public static ChaineCryptee deCryptee(String cryptee, int decalage) {
-        String clair = decrypteStatic(cryptee, decalage);
-        return new ChaineCryptee(clair, decalage);
+        return new ChaineCryptee(cryptee, decalage);
     }
 
     /**
-     * Retourne la chaîne cryptée.
+     * Retourne la chaîne cryptée stockée.
      */
     public String crypte() {
-        return crypteStatic(clair, decalage);
+        return cryptee;
     }
 
     /**
-     * Retourne la chaîne en clair.
+     * Retourne la chaîne décryptée calculée à partir de la version cryptée.
      */
     public String decrypte() {
-        return clair;
+        return decrypteStatic(cryptee, decalage);
     }
 
     /**
      * Méthode statique pour chiffrer une chaîne.
      */
     private static String crypteStatic(String s, int decalage) {
-        if (s == null) return null; // ✅ Empêche les NullPointerException
+        if (s == null) return null;
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             sb.append(decaleCaractere(c, decalage));
