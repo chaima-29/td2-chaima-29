@@ -1,12 +1,18 @@
 package fr.uvsq.cprog;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Classe permettant de chiffrer et déchiffrer une chaîne de caractères
  * (lettres majuscules et espaces) par décalage.
  *
- * Version modifiée : seule la chaîne cryptée est stockée.
+ * Version : seule la chaîne cryptée est stockée.
+ * Les affichages se font maintenant via SLF4J.
  */
 public class ChaineCryptee {
+
+    private static final Logger logger = LoggerFactory.getLogger(ChaineCryptee.class);
 
     private String cryptee;
     private int decalage;
@@ -79,16 +85,19 @@ public class ChaineCryptee {
     }
 
     /**
-     * Méthode main de démonstration.
-     * Montre le chiffrement et le déchiffrement d'une chaîne.
+     * Méthode main : démonstration avec SLF4J.
      */
     public static void main(String[] args) {
+        logger.info("=== DÉMONSTRATION DU CHIFFREMENT ===");
+
         ChaineCryptee c1 = ChaineCryptee.deEnClair("BONJOUR TOUT LE MONDE", 3);
-        System.out.println("Chaîne en clair   : BONJOUR TOUT LE MONDE");
-        System.out.println("Chaîne cryptée    : " + c1.crypte());
-        System.out.println("Chaîne décryptée  : " + c1.decrypte());
+        logger.info("Chaîne en clair   : BONJOUR TOUT LE MONDE");
+        logger.info("Chaîne cryptée    : {}", c1.crypte());
+        logger.info("Chaîne décryptée  : {}", c1.decrypte());
 
         ChaineCryptee c2 = ChaineCryptee.deCryptee("DEF", 3);
-        System.out.println("Décryptage de DEF avec clé 3 : " + c2.decrypte());
+        logger.info("Décryptage de DEF avec clé 3 : {}", c2.decrypte());
+
+        logger.info("=== FIN DE LA DÉMONSTRATION ===");
     }
 }
