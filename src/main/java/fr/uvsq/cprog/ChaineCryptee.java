@@ -9,36 +9,48 @@ public class ChaineCryptee {
     private String clair;
     private int decalage;
 
-    // Constructeur privé
+    /**
+     * Constructeur privé pour forcer l'utilisation des méthodes de fabrique.
+     */
     private ChaineCryptee(String clair, int decalage) {
         this.clair = clair;
         this.decalage = decalage;
     }
 
-    // Méthode de création depuis une chaîne en clair
+    /**
+     * Méthode de fabrique pour créer une ChaineCryptee à partir d'une chaîne en clair.
+     */
     public static ChaineCryptee deEnClair(String clair, int decalage) {
         return new ChaineCryptee(clair, decalage);
     }
 
-    // Méthode de création depuis une chaîne déjà cryptée
+    /**
+     * Méthode de fabrique pour créer une ChaineCryptee à partir d'une chaîne déjà cryptée.
+     */
     public static ChaineCryptee deCryptee(String cryptee, int decalage) {
         String clair = decrypteStatic(cryptee, decalage);
         return new ChaineCryptee(clair, decalage);
     }
 
-    // Méthode pour obtenir la chaîne chiffrée
+    /**
+     * Retourne la chaîne cryptée.
+     */
     public String crypte() {
         return crypteStatic(clair, decalage);
     }
 
-    // Méthode pour obtenir la chaîne en clair
+    /**
+     * Retourne la chaîne en clair.
+     */
     public String decrypte() {
         return clair;
     }
 
-    // Méthodes statiques utilitaires
+    /**
+     * Méthode statique pour chiffrer une chaîne.
+     */
     private static String crypteStatic(String s, int decalage) {
-        if (s == null) return null;
+        if (s == null) return null; // ✅ Empêche les NullPointerException
         StringBuilder sb = new StringBuilder();
         for (char c : s.toCharArray()) {
             sb.append(decaleCaractere(c, decalage));
@@ -46,10 +58,18 @@ public class ChaineCryptee {
         return sb.toString();
     }
 
+    /**
+     * Méthode statique pour déchiffrer une chaîne.
+     */
     private static String decrypteStatic(String s, int decalage) {
+        if (s == null) return null;
         return crypteStatic(s, 26 - decalage % 26);
     }
 
+    /**
+     * Décale un caractère majuscule selon la clé donnée.
+     * Les espaces sont conservés.
+     */
     private static char decaleCaractere(char c, int decalage) {
         if (c == ' ') return ' ';
         return (char) ('A' + (c - 'A' + decalage + 26) % 26);
