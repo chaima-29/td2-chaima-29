@@ -39,17 +39,28 @@ Ces conventions permettent à Maven de gérer automatiquement la compilation, le
  
 2. Examinez le projet Maven ainsi que le fichier de description et répondez aux questions suivantes :
     1.  Dans quel répertoire se trouvent les fichiers sources du projet ? Les sources des tests ?
-        > RÉPONDRE ICI
-    1. Quelles sont les coordonnées du projet ?
-        > RÉPONDRE ICI
-    1. À quoi sert la propriété `project.build.sourceEncoding` ?
-        > RÉPONDRE ICI
-    1. Quelles versions des sources et de la JVM sont utilisés ?
-        > RÉPONDRE ICI
-    1. Quelle version de JUnit est configurée ? À quoi sert la balise `scope` ?
-        > RÉPONDRE ICI
-    1. À quoi sert la section `pluginManagement` ?
-        > RÉPONDRE ICI
+        > Les fichiers sources du projet se trouvent dans le répertoire :
+        src/main/java
+        et les fichiers de tests se trouvent dans :
+        src/test/java.
+Ces emplacements sont imposés par la convention Maven : le dossier main contient le code principal, et le dossier test contient uniquement le code utilisé pour les tests unitaires.
+    2. Quelles sont les coordonnées du projet ?
+        > Les coordonnées du projet se trouvent dans le fichier pom.xml et sont définies par les balises suivantes :
+     <groupId>com.mycompany</groupId>
+     <artifactId>td2-chaima-29</artifactId>
+     <version>1.0-SNAPSHOT</version>
+    3. À quoi sert la propriété `project.build.sourceEncoding` ?
+        > La propriété project.build.sourceEncoding définit l’encodage des fichiers sources (par exemple UTF-8).
+       Elle permet d’éviter les erreurs liées aux caractères spéciaux (comme les accents) lors de la compilation.
+    4. Quelles versions des sources et de la JVM sont utilisés ?
+        > le projet est compilé avec Java 17, et les fichiers .class générés sont compatibles avec la JVM Java 17.
+    5. Quelle version de JUnit est configurée ? À quoi sert la balise `scope` ?
+        > Le projet utilise JUnit 5.8.2
+        > Balise <scope> : indique que cette dépendance est utilisée uniquement pour les tests.
+       Elle ne sera donc pas incluse dans le JAR final du projet
+    6. À quoi sert la section `pluginManagement` ?
+        > La section <pluginManagement> sert à définir les versions par défaut des plugins Maven utilisés dans le projet (ou dans ses sous-modules).
+       Elle ne déclenche pas directement l’exécution des plugins, mais précise à Maven quelle version utiliser lorsqu’un plugin est appelé ailleurs dans le pom.xml.
 1.  Modifiez la configuration du projet de la façon suivante :
     1.  fixez la version des sources et des .class pour utiliser la version 17 de Java
     1.  utilisez la dernière version stable de JUnit 4 (cf. [MVNRepository](https://mvnrepository.com/))
