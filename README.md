@@ -61,27 +61,40 @@ Ces emplacements sont imposés par la convention Maven : le dossier main contien
     6. À quoi sert la section `pluginManagement` ?
         > La section <pluginManagement> sert à définir les versions par défaut des plugins Maven utilisés dans le projet (ou dans ses sous-modules).
        Elle ne déclenche pas directement l’exécution des plugins, mais précise à Maven quelle version utiliser lorsqu’un plugin est appelé ailleurs dans le pom.xml.
-1.  Modifiez la configuration du projet de la façon suivante :
+3.  Modifiez la configuration du projet de la façon suivante :
     1.  fixez la version des sources et des .class pour utiliser la version 17 de Java
-    1.  utilisez la dernière version stable de JUnit 4 (cf. [MVNRepository](https://mvnrepository.com/))
-1.  Ajoutez un fichier `.gitignore` adapté aux projets Maven (cf. [A collection of .gitignore templates](https://github.com/github/gitignore)) et ajoutez-y les fichiers et répertoires de votre IDE.
-1.  Quelle commande Maven permet de :
+    2.  utilisez la dernière version stable de JUnit 4 (cf. [MVNRepository](https://mvnrepository.com/))
+4.  Ajoutez un fichier `.gitignore` adapté aux projets Maven (cf. [A collection of .gitignore templates](https://github.com/github/gitignore)) et ajoutez-y les fichiers et répertoires de votre IDE.
+5.  Quelle commande Maven permet de :
     1.  créer un `jar` du projet ?
-        > RÉPONDRE ICI
-    1. lancer les tests ?
-        > RÉPONDRE ICI
-    1. supprimer tous les fichiers issus de la compilation ?
-        > RÉPONDRE ICI
-1.  Ajoutez une classe `ChaineCryptee` et une classe `ChaineCrypteeTest` dans les répertoires et packages appropriés.
+        > mvn package
+    2. lancer les tests ?
+        > mvn test
+    3. supprimer tous les fichiers issus de la compilation ?
+        > mvn clean
+6.  Ajoutez une classe `ChaineCryptee` et une classe `ChaineCrypteeTest` dans les répertoires et packages appropriés.
     Supprimez les classes d'exemple `App` et `AppTest`.
-1.  Énumérez une liste de cas de tests à réaliser en n'oubliant pas les cas d'erreur.
-    > RÉPONDRE ICI
-1.  Pour chaque cas de test,
+7.  Énumérez une liste de cas de tests à réaliser en n'oubliant pas les cas d'erreur.
+    > Voici les principaux cas de tests à prévoir pour vérifier le bon fonctionnement de la classe ChaineCryptee :
+      Cas normaux :
+      Vérifier que le chiffrement d’une chaîne simple fonctionne correctement (exemple : "ABC" → "DEF" avec un décalage de 3).
+      Vérifier que le déchiffrement fonctionne correctement (exemple : "DEF" → "ABC").
+      Vérifier que les espaces ne sont pas modifiés.
+      Vérifier que la lettre 'Z' revient bien à 'C' lors du décalage (bouclage de l’alphabet).
+      Cas limites et erreurs :
+      Vérifier qu’une chaîne vide ("") renvoie une chaîne vide.
+      Vérifier qu’une chaîne null ne provoque pas d’erreur.
+      Vérifier qu’un décalage nul (0) laisse la chaîne inchangée.
+      Vérifier qu’un décalage supérieur à 26 est bien pris en compte grâce au calcul modulaire.
+      (Optionnel) Vérifier la gestion des caractères non autorisés (autres que les majuscules et les espaces).
+      Ces tests permettent de s’assurer que la classe fonctionne correctement dans les cas normaux, mais aussi dans les situations limites ou d’erreur.
+ 
+8. Pour chaque cas de test,
     1. écrivez le test JUnit correspondant dans la classe de test,
-    1. vérifiez qu’il échoue,
-    1. implémentez la fonctionnalité dans la classe,
-    1. vérifiez que le test passe,
-    1. appliquez un étape de refactoring sur les tests et la classe si nécessaire.
+    2. vérifiez qu’il échoue,
+    3. implémentez la fonctionnalité dans la classe,
+    4. vérifiez que le test passe,
+    5. appliquez un étape de refactoring sur les tests et la classe si nécessaire.
 1.  Comment se comporte votre classe si la chaîne passée au constructeur est `null` ?
 Vous pouvez utiliser le débogueur pour identifier le problème (s'il y a un problème) au niveau de `crypte`.
     > RÉPONDRE ICI
