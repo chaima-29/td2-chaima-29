@@ -61,19 +61,24 @@ Ces emplacements sont imposés par la convention Maven : le dossier main contien
     6. À quoi sert la section `pluginManagement` ?
         > La section <pluginManagement> sert à définir les versions par défaut des plugins Maven utilisés dans le projet (ou dans ses sous-modules).
        Elle ne déclenche pas directement l’exécution des plugins, mais précise à Maven quelle version utiliser lorsqu’un plugin est appelé ailleurs dans le pom.xml.
-3.  Modifiez la configuration du projet de la façon suivante :
+ 
+3. Modifiez la configuration du projet de la façon suivante :
     1.  fixez la version des sources et des .class pour utiliser la version 17 de Java
     2.  utilisez la dernière version stable de JUnit 4 (cf. [MVNRepository](https://mvnrepository.com/))
-4.  Ajoutez un fichier `.gitignore` adapté aux projets Maven (cf. [A collection of .gitignore templates](https://github.com/github/gitignore)) et ajoutez-y les fichiers et répertoires de votre IDE.
-5.  Quelle commande Maven permet de :
+  
+4. Ajoutez un fichier `.gitignore` adapté aux projets Maven (cf. [A collection of .gitignore templates](https://github.com/github/gitignore)) et ajoutez-y les fichiers et répertoires de votre IDE.
+  
+5. Quelle commande Maven permet de :
     1.  créer un `jar` du projet ?
         > mvn package
     2. lancer les tests ?
         > mvn test
     3. supprimer tous les fichiers issus de la compilation ?
         > mvn clean
+
 6.  Ajoutez une classe `ChaineCryptee` et une classe `ChaineCrypteeTest` dans les répertoires et packages appropriés.
     Supprimez les classes d'exemple `App` et `AppTest`.
+
 7.  Énumérez une liste de cas de tests à réaliser en n'oubliant pas les cas d'erreur.
     > Voici les principaux cas de tests à prévoir pour vérifier le bon fonctionnement de la classe ChaineCryptee :
       Cas normaux :
@@ -95,12 +100,17 @@ Ces emplacements sont imposés par la convention Maven : le dossier main contien
     3. implémentez la fonctionnalité dans la classe,
     4. vérifiez que le test passe,
     5. appliquez un étape de refactoring sur les tests et la classe si nécessaire.
-1.  Comment se comporte votre classe si la chaîne passée au constructeur est `null` ?
+   
+9.  Comment se comporte votre classe si la chaîne passée au constructeur est `null` ?
 Vous pouvez utiliser le débogueur pour identifier le problème (s'il y a un problème) au niveau de `crypte`.
-    > RÉPONDRE ICI
+    > Si on crée un objet ChaineCryptee avec une chaîne null, la méthode crypte() renvoie également null.
+    Il n’y a donc pas d’erreur (pas de NullPointerException), car la méthode vérifie si la chaîne est null avant de la parcourir.
+
+    Ce comportement permet d’éviter les erreurs d’exécution lorsque la chaîne d’entrée n’a pas été initialisée.
     1. ajoutez un test pour prendre en compte la chaîne `null`,
-    1. si nécessaire, modifiez la classe pour faire passer le test
-1. Changez la représentation interne de la classe : seule la chaîne cryptée est stockée (plus la chaîne en clair).
+    2. si nécessaire, modifiez la classe pour faire passer le test
+    
+10. Changez la représentation interne de la classe : seule la chaîne cryptée est stockée (plus la chaîne en clair).
     * effectuez les modifications nécessaires sans changer l'interface de la classe (les tests ne seront donc pas impactés).
 1.  Modifiez le POM pour intégrer la vérification des conventions de codage avec [`checkstyle`](http://maven.apache.org/plugins/maven-checkstyle-plugin/) en utilisant les conventions _Google_.
 1.  Ajoutez une méthode `main` qui démontre quelques fonctionnalités de la classe, puis modifiez le POM pour que le jar généré soit exécutable (cf. [Apache Maven JAR Plugin](https://maven.apache.org/plugins/maven-jar-plugin/index.html))
