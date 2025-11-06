@@ -28,8 +28,16 @@ Il pourra éventuellement être nécessaire de [configurer le proxy](http://mave
 À chaque étape, validez vos modifications avec `git` et si nécessaire, exécutez le cycle maven adapté pour vérifier vos manipulations.
 
 1.  Quelles conventions utilise Maven pour l’arborescence des répertoires ?
-    > RÉPONDRE ICI
-1.  Examinez le projet Maven ainsi que le fichier de description et répondez aux questions suivantes :
+    > Maven utilise une arborescence standardisée :
+Le code source se trouve dans src/main/java
+Les ressources dans src/main/resources
+Les tests dans src/test/java
+Les ressources de test dans src/test/resources
+Les fichiers compilés et exécutables sont générés dans le répertoire target/
+Le fichier pom.xml à la racine contient la configuration du projet
+Ces conventions permettent à Maven de gérer automatiquement la compilation, les tests et le packaging.
+ 
+2. Examinez le projet Maven ainsi que le fichier de description et répondez aux questions suivantes :
     1.  Dans quel répertoire se trouvent les fichiers sources du projet ? Les sources des tests ?
         > RÉPONDRE ICI
     1. Quelles sont les coordonnées du projet ?
